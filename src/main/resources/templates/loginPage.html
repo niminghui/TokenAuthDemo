@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+    <script>
+        function changeValue(){
+            var check = document.getElementById("rememberMe");
+            if(check.checked == true){
+                document.getElementById("rememberMe").value = true;
+            }else{
+                document.getElementById("rememberMe").value = false;
+            }
+        }
+    </script>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<form th:action="@{/auth/login}" method="post">
+    <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><label> RememberMe: <input type="checkbox" name="rememberMe" id="rememberMe" onclick="changeValue()"/></label></div>
+    <div><input type="submit" value="Sign In"/></div>
+</form>
+</body>
+</html>

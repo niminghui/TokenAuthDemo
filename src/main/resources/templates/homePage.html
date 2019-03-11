@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="getToken.js" type="text/javascript"></script>
+</head>
+<body>
+    <script>
+        var token=$.getUrlParam("token");
+        window.onload = function () {
+            $("#token").val(token);
+        }
+        function deleteTask() {
+            $.ajax({
+                type : 'delete',
+                url : '/tasks/1',
+                contentType : 'application/json;charset=UTF-8',
+                dataType : 'text',
+                beforeSend: function(request) {
+                    request.setRequestHeader("Authorization","Bearer "+token);
+                },
+                success : function(data,textStatus,jqXHR){
+                    alert("response:"+data);
+                },
+                error: function (err) {
+                    alert("ajax错误码:" + err.status);
+                }
+            });
+        }
+    </script>
+    <h1>Login success</h1>
+    <textarea id="token" rows="5" cols="50"></textarea>
+    <input type="button" value="admin角色才能删除" onclick="deleteTask()"/>
+</body>
+</html>

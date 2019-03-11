@@ -1,0 +1,49 @@
+spring:
+  # 配置thymeleaf视图
+  resources:
+    static-locations: classpath:/templates/,classpath:/static/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    servlet:
+      content-type: text/html
+    cache: false
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/jwtauth?characterEncoding=utf-8&useSSl=false&serverTimezone=GMT%2B8
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 配置druid数据连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 监控统计拦截的filters
+    filters: stat,wall,log4j
+    # 连接池的初始大小、最小、最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 获取连接的超时时间
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    # 一个连接在池中最小生存的时间
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    connectionProperties:
+      druid:
+        stat:
+          mergeSql: true
+          slowSqlMillis: 5000
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
